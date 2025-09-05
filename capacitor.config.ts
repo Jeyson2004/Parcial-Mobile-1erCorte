@@ -1,9 +1,8 @@
 import type { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'io.ionic.starter',
-  appName: 'my-news-app',
-  webDir: 'www'
+  appId: 'com.jeyson.mynewsapp',
+  appName: 'My News App',
+  webDir: 'www',
 };
-
 export default config;
