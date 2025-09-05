@@ -1,0 +1,25 @@
+<ion-card
+  [class]="cardClass"
+  (click)="onClick($event)"
+  [button]="clickable"
+>
+  <div *ngIf="loading" class="loading-overlay">
+    <ion-spinner name="crescent"></ion-spinner>
+  </div>
+
+  <img
+    *ngIf="imageUrl && !loading"
+    [src]="imageUrl"
+    [alt]="imageAlt"
+    class="card-image"
+  />
+
+  <ion-card-header *ngIf="title || subtitle">
+    <ion-card-subtitle *ngIf="subtitle">{{ subtitle }}</ion-card-subtitle>
+    <ion-card-title *ngIf="title">{{ title }}</ion-card-title>
+  </ion-card-header>
+
+  <ion-card-content>
+    <ng-content></ng-content>
+  </ion-card-content>
+</ion-card>

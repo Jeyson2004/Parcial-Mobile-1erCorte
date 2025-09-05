@@ -1,0 +1,52 @@
+<ion-item lines="full" [class.has-error]="hasError" [class.is-disabled]="disabled">
+  <ion-label position="stacked" *ngIf="label">
+    {{ label }}
+    <span *ngIf="required" class="required-asterisk">*</span>
+  </ion-label>
+
+  <ion-icon
+    *ngIf="icon"
+    [name]="icon"
+    slot="start"
+    class="input-icon"
+  ></ion-icon>
+
+  <ion-input
+    [type]="inputType"
+    [placeholder]="placeholder"
+    [disabled]="disabled"
+    [value]="value"
+    (ionInput)="onInputChange($event)"
+    (ionBlur)="onInputBlur($event)"
+    (ionFocus)="onInputFocus($event)"
+    [class.ion-invalid]="hasError"
+  ></ion-input>
+
+  <ion-button
+    *ngIf="clearable && value"
+    slot="end"
+    fill="clear"
+    size="small"
+    (click)="clearInput()"
+  >
+    <ion-icon name="close-circle-outline"></ion-icon>
+  </ion-button>
+
+  <ion-button
+    *ngIf="showPasswordToggle && type === 'password'"
+    slot="end"
+    fill="clear"
+    size="small"
+    (click)="togglePasswordVisibility()"
+  >
+    <ion-icon [name]="showPassword ? 'eye-off-outline' : 'eye-outline'"></ion-icon>
+  </ion-button>
+
+  <ion-note slot="helper" *ngIf="helperText && !hasError">
+    {{ helperText }}
+  </ion-note>
+
+  <ion-note slot="error" *ngIf="hasError">
+    {{ errorMessage }}
+  </ion-note>
+</ion-item>

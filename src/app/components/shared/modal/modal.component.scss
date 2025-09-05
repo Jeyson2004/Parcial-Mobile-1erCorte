@@ -1,0 +1,43 @@
+.modal-small {
+  --width: 300px;
+  --height: auto;
+  --max-height: 400px;
+}
+
+.modal-medium {
+  --width: 500px;
+  --height: auto;
+  --max-height: 600px;
+}
+
+.modal-large {
+  --width: 800px;
+  --height: auto;
+  --max-height: 80vh;
+}
+
+.modal-full {
+  --width: 100%;
+  --height: 100%;
+}
+
+.modal-subtitle {
+  font-size: 16px;
+  color: var(--ion-color-medium);
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+
+ion-content {
+  --padding-top: 20px;
+  --padding-bottom: 20px;
+}
+
+@media (max-width: 768px) {
+  .modal-small,
+  .modal-medium,
+  .modal-large {
+    --width: 95%;
+    --max-height: 90vh;
+  }
+}

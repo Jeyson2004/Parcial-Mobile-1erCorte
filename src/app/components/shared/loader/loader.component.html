@@ -1,0 +1,10 @@
+<div [class]="loaderClass">
+  <div class="loader-content">
+    <ion-spinner
+      [name]="spinner"
+      [color]="color"
+      [class]="'spinner-' + size"
+    ></ion-spinner>
+    <p *ngIf="message" class="loader-message">{{ message }}</p>
+  </div>
+</div>

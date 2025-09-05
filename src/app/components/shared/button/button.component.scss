@@ -1,0 +1,36 @@
+.custom-button {
+  --border-radius: 8px;
+  font-weight: 600;
+
+  &.size-small {
+    height: 36px;
+    font-size: 14px;
+  }
+
+  &.size-large {
+    height: 56px;
+    font-size: 18px;
+  }
+
+  &.loading {
+    pointer-events: none;
+  }
+}
+
+ion-spinner {
+  margin-right: 8px;
+
+  &[slot="end"] {
+    margin-right: 0;
+    margin-left: 8px;
+  }
+}
+
+ion-icon {
+  margin-right: 8px;
+
+  &[slot="end"] {
+    margin-right: 0;
+    margin-left: 8px;
+  }
+}

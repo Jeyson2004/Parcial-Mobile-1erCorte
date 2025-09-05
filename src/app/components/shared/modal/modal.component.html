@@ -1,0 +1,32 @@
+<ion-modal
+  #modal
+  [isOpen]="isOpen"
+  [showBackdrop]="showBackdrop"
+  [backdropDismiss]="backdropDismiss"
+  [class]="modalClass"
+  (didDismiss)="onDidDismiss($event)"
+  (willDismiss)="onWillDismiss($event)"
+  (didPresent)="onDidPresent($event)"
+  (willPresent)="onWillPresent($event)"
+>
+  <ng-template>
+    <ion-header>
+      <ion-toolbar>
+        <ion-title *ngIf="title">{{ title }}</ion-title>
+        <ion-buttons slot="end" *ngIf="showCloseButton">
+          <ion-button (click)="close()">
+            <ion-icon name="close-outline"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+
+    <ion-content class="ion-padding">
+      <div *ngIf="subtitle" class="modal-subtitle">
+        {{ subtitle }}
+      </div>
+
+      <ng-content></ng-content>
+    </ion-content>
+  </ng-template>
+</ion-modal>

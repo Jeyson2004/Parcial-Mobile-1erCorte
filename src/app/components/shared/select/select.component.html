@@ -1,0 +1,32 @@
+<ion-item lines="full" [class.has-error]="hasError" [class.is-disabled]="disabled">
+  <ion-label position="stacked" *ngIf="label">
+    {{ label }}
+    <span *ngIf="required" class="required-asterisk">*</span>
+  </ion-label>
+
+  <ion-select
+    [placeholder]="placeholder"
+    [disabled]="disabled"
+    [multiple]="multiple"
+    [interface]="interface"
+    [value]="value"
+    (ionChange)="onSelectionChange($event)"
+    [class.ion-invalid]="hasError"
+  >
+    <ion-select-option
+      *ngFor="let option of options"
+      [value]="option.value"
+      [disabled]="option.disabled"
+    >
+      {{ option.label }}
+    </ion-select-option>
+  </ion-select>
+
+  <ion-note slot="helper" *ngIf="helperText && !hasError">
+    {{ helperText }}
+  </ion-note>
+
+  <ion-note slot="error" *ngIf="hasError">
+    {{ errorMessage }}
+  </ion-note>
+</ion-item>

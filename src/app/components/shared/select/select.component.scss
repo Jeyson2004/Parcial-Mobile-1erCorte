@@ -1,0 +1,28 @@
+ion-item {
+  --border-radius: 8px;
+  --border-width: 1px;
+  --border-color: var(--ion-color-medium);
+  margin-bottom: 16px;
+
+  &.has-error {
+    --border-color: var(--ion-color-danger);
+  }
+
+  &.is-disabled {
+    opacity: 0.6;
+  }
+}
+
+.required-asterisk {
+  color: var(--ion-color-danger);
+  margin-left: 2px;
+}
+
+ion-select {
+  width: 100%;
+}
+
+ion-note {
+  font-size: 12px;
+  margin-top: 4px;
+}

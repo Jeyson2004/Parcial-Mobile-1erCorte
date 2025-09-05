@@ -1,10 +1,10 @@
 export const environment = {
   production: false,
-  appName: "News App",
-  appVersion: "1.0.0",
+  appName: "News App (Staging)",
+  appVersion: "1.0.0-staging",
 
   // API Configuration
-  newsApiKey: "YOUR_NEWS_API_KEY",
+  newsApiKey: "YOUR_STAGING_NEWS_API_KEY",
   newsApiUrl: "https://newsapi.org/v2",
   countriesApiUrl: "https://restcountries.com/v3.1",
 
@@ -13,20 +13,20 @@ export const environment = {
   defaultCountry: "us",
   defaultPageSize: 20,
   maxRetries: 3,
-  requestTimeout: 10000,
+  requestTimeout: 12000,
 
   // Security Configuration
   tokenExpirationTime: 24 * 60 * 60 * 1000, // 24 hours
   maxLoginAttempts: 5,
   lockoutDuration: 15 * 60 * 1000, // 15 minutes
-  encryptionKey: "news-app-dev-key-2024",
+  encryptionKey: "news-app-staging-key-2024",
 
   // Feature Flags
   features: {
     enableOfflineMode: true,
-    enablePushNotifications: false,
-    enableAnalytics: false,
-    enableCrashReporting: false,
+    enablePushNotifications: true,
+    enableAnalytics: true,
+    enableCrashReporting: true,
     enableDarkMode: true,
     enableSocialSharing: true,
     enableBookmarks: true,
@@ -43,9 +43,9 @@ export const environment = {
 
   // Logging Configuration
   logging: {
-    level: "debug",
+    level: "info",
     enableConsoleLogging: true,
-    enableRemoteLogging: false,
+    enableRemoteLogging: true,
     logApiCalls: true,
     logUserActions: true,
   },
