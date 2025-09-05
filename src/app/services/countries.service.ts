@@ -1,25 +1,28 @@
-import { Injectable } from "@angular/core"
-import { HttpClient } from "@angular/common/http"
-import { Observable } from "rxjs"
-import { map } from "rxjs/operators"
-import { Country } from "../models/country.model"
-import { environment } from "../../environments/environment"
+// services/countries.service.ts
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable, map } from 'rxjs';
+import { environment } from '../../environments/environment';
+import { CountryOption } from '../models/country.model';
 
-@Injectable({
-  providedIn: "root",
-})
+interface CountriesNowResponse {
+  error: boolean;
+  msg: string;
+  data: Array<{ name: string; unicodeFlag: string; iso2: string; iso3: string }>;
+}
+
+@Injectable({ providedIn: 'root' })
 export class CountriesService {
   constructor(private http: HttpClient) {}
 
-  getCountries(): Observable<Country[]> {
-    return this.http
-      .get<Country[]>(`${environment.countriesApiUrl}/all`)
-      .pipe(map((countries) => countries.sort((a, b) => a.name.common.localeCompare(b.name.common))))
-  }
-
-  getCountryByCode(code: string): Observable<Country> {
-    return this.http
-      .get<Country[]>(`${environment.countriesApiUrl}/alpha/${code}`)
-      .pipe(map((countries) => countries[0]))
+  getCountries(): Observable<CountryOption[]> {
+    return this.http.get<CountriesNowResponse>(environment.countriesApiUrl).pipe(
+      map(res =>
+        (res.data ?? []).map(c => ({
+          id: c.name,
+          value: `${c.unicodeFlag} ${c.name}`,
+        }))
+      )
+    );
   }
 }

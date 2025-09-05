@@ -1,0 +1,71 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Iniciar Sesión</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <div class="login-container">
+    <div class="logo-section">
+      <ion-icon name="newspaper-outline" size="large" color="primary"></ion-icon>
+      <h1>News App</h1>
+      <p>Inicia sesión para acceder a las noticias</p>
+    </div>
+
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <ion-item lines="full" class="form-item">
+        <ion-label position="stacked">Email</ion-label>
+        <ion-input
+          type="email"
+          formControlName="email"
+          placeholder="Ingresa tu email"
+          [class.ion-invalid]="email?.invalid && email?.touched"
+        ></ion-input>
+        <ion-note slot="error" *ngIf="email?.invalid && email?.touched">
+          <div *ngIf="email?.errors?.['required']">El email es requerido</div>
+          <div *ngIf="email?.errors?.['email']">Ingresa un email válido</div>
+        </ion-note>
+      </ion-item>
+
+      <ion-item lines="full" class="form-item">
+        <ion-label position="stacked">Contraseña</ion-label>
+        <ion-input
+          [type]="showPassword ? 'text' : 'password'"
+          formControlName="password"
+          placeholder="Ingresa tu contraseña"
+          [class.ion-invalid]="password?.invalid && password?.touched"
+        ></ion-input>
+        <ion-button
+          slot="end"
+          fill="clear"
+          (click)="togglePasswordVisibility()"
+        >
+          <ion-icon [name]="showPassword ? 'eye-off-outline' : 'eye-outline'"></ion-icon>
+        </ion-button>
+        <ion-note slot="error" *ngIf="password?.invalid && password?.touched">
+          <div *ngIf="password?.errors?.['required']">La contraseña es requerida</div>
+          <div *ngIf="password?.errors?.['minlength']">Mínimo 6 caracteres</div>
+        </ion-note>
+      </ion-item>
+
+      <ion-button
+        expand="block"
+        type="submit"
+        [disabled]="loginForm.invalid"
+        class="login-button"
+      >
+        Iniciar Sesión
+      </ion-button>
+    </form>
+
+    <div class="register-section">
+      <p>¿No tienes cuenta?</p>
+      <ion-button fill="clear" (click)="goToRegister()">
+        Regístrate aquí
+      </ion-button>
+    </div>
+  </div>
+</ion-content>

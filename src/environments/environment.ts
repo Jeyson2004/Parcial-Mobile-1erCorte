@@ -4,9 +4,9 @@ export const environment = {
   appVersion: "1.0.0",
 
   // API Configuration
-  newsApiKey: "YOUR_NEWS_API_KEY",
+  newsApiKey: "38340c09300543beb244a9ff4fbf9b15",
   newsApiUrl: "https://newsapi.org/v2",
-  countriesApiUrl: "https://restcountries.com/v3.1",
+  countriesApiUrl: "https://countriesnow.space/api/v0.1/countries/flag/unicode",
 
   // App Configuration
   defaultLanguage: "es",

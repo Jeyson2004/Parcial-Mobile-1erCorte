@@ -1,0 +1,156 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Noticias</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="goToProfile()">
+        <ion-icon name="person-outline"></ion-icon>
+      </ion-button>
+      <ion-button (click)="logout()">
+        <ion-icon name="log-out-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+   Search and Filter Section
+  <div class="search-section ion-padding">
+    <form [formGroup]="searchForm">
+      <div class="search-row">
+        <ion-searchbar
+          formControlName="query"
+          placeholder="Buscar noticias..."
+          (ionInput)="searchNews()"
+          (ionClear)="clearSearch()"
+          show-clear-button="focus"
+        ></ion-searchbar>
+      </div>
+
+      <div class="filter-row">
+        <ion-item lines="none" class="filter-item">
+          <ion-select
+            formControlName="category"
+            placeholder="Categoría"
+            (ionChange)="loadTopHeadlines()"
+          >
+            <ion-select-option
+              *ngFor="let category of categories"
+              [value]="category.value"
+            >
+              {{ category.label }}
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item lines="none" class="filter-item">
+          <ion-select
+            formControlName="sortBy"
+            placeholder="Ordenar por"
+            (ionChange)="searchNews()"
+          >
+            <ion-select-option
+              *ngFor="let option of sortOptions"
+              [value]="option.value"
+            >
+              {{ option.label }}
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
+      </div>
+    </form>
+  </div>
+
+   Pull to Refresh
+  <ion-refresher slot="fixed" (ionRefresh)="refreshNews($event)">
+    <ion-refresher-content
+      pullingIcon="chevron-down-circle-outline"
+      pullingText="Desliza para actualizar"
+      refreshingSpinner="crescent"
+      refreshingText="Actualizando noticias..."
+    ></ion-refresher-content>
+  </ion-refresher>
+
+   Loading State
+  <app-loader
+    *ngIf="loading && articles.length === 0"
+    message="Cargando noticias..."
+    size="large"
+  ></app-loader>
+
+   Error State
+  <div *ngIf="error && articles.length === 0" class="error-state ion-padding">
+    <ion-icon name="alert-circle-outline" size="large" color="danger"></ion-icon>
+    <h3>Error al cargar noticias</h3>
+    <p>{{ error }}</p>
+    <app-button
+      text="Reintentar"
+      color="primary"
+      (buttonClick)="loadTopHeadlines()"
+    ></app-button>
+  </div>
+
+   News Articles
+  <div *ngIf="!loading || articles.length > 0" class="news-container">
+    <div *ngIf="articles.length === 0 && !loading" class="empty-state ion-padding">
+      <ion-icon name="newspaper-outline" size="large" color="medium"></ion-icon>
+      <h3>No hay noticias disponibles</h3>
+      <p>Intenta cambiar los filtros o buscar algo diferente</p>
+    </div>
+
+    <app-card
+      *ngFor="let article of articles; trackBy: trackByUrl"
+      [title]="article.title"
+      [subtitle]="getSourceName(article) + ' • ' + getTimeAgo(article.publishedAt)"
+      [imageUrl]="getImageUrl(article)"
+      [imageAlt]="article.title"
+      [clickable]="true"
+      [elevated]="true"
+      (cardClick)="openArticle(article)"
+      class="news-card"
+    >
+      <div class="article-content">
+        <p *ngIf="article.description" class="article-description">
+          {{ truncateText(article.description, 150) }}
+        </p>
+
+        <div class="article-actions">
+          <ion-button
+            fill="clear"
+            size="small"
+            (click)="$event.stopPropagation(); openArticle(article)"
+          >
+            <ion-icon name="open-outline" slot="start"></ion-icon>
+            Leer más
+          </ion-button>
+
+          <ion-button
+            fill="clear"
+            size="small"
+            (click)="$event.stopPropagation(); shareArticle(article)"
+          >
+            <ion-icon name="share-outline" slot="start"></ion-icon>
+            Compartir
+          </ion-button>
+        </div>
+      </div>
+    </app-card>
+
+     Infinite Scroll
+    <ion-infinite-scroll
+      *ngIf="hasMoreData && articles.length > 0"
+      (ionInfinite)="loadMoreNews($event)"
+    >
+      <ion-infinite-scroll-content
+        loadingSpinner="crescent"
+        loadingText="Cargando más noticias..."
+      ></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+
+     Results Info
+    <div *ngIf="articles.length > 0" class="results-info ion-padding">
+      <p class="results-text">
+        Mostrando {{ articles.length }} de {{ totalResults }} noticias
+      </p>
+    </div>
+  </div>
+</ion-content>

@@ -1,0 +1,32 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      News App
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">News App</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div id="container">
+    <strong>Bienvenido a la App de Noticias</strong>
+    <p>Aplicación móvil para consumo de noticias con gestión de usuarios</p>
+
+    <ion-button routerLink="/login" expand="block" fill="solid" shape="round">
+      Iniciar Sesión
+    </ion-button>
+
+    <ion-button routerLink="/register" expand="block" fill="outline" shape="round">
+      Registrarse
+    </ion-button>
+
+    <ion-button routerLink="/news" expand="block" fill="clear" shape="round">
+      Ver Noticias
+    </ion-button>
+  </div>
+</ion-content>

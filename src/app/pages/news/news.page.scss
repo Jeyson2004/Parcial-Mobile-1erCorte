@@ -1,0 +1,118 @@
+.search-section {
+  background: var(--ion-color-light);
+  border-bottom: 1px solid var(--ion-color-border);
+
+  .search-row {
+    margin-bottom: 12px;
+  }
+
+  .filter-row {
+    display: flex;
+    gap: 12px;
+
+    .filter-item {
+      flex: 1;
+      --background: var(--ion-color-background);
+      --border-radius: 8px;
+      --border-width: 1px;
+      --border-color: var(--ion-color-medium);
+    }
+  }
+}
+
+.news-container {
+  padding: 16px;
+}
+
+.news-card {
+  margin-bottom: 16px;
+
+  .article-content {
+    .article-description {
+      font-size: 14px;
+      line-height: 1.5;
+      color: var(--ion-color-medium);
+      margin: 0 0 16px 0;
+    }
+
+    .article-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 12px;
+
+      ion-button {
+        --color: var(--ion-color-primary);
+        font-size: 12px;
+
+        ion-icon {
+          font-size: 16px;
+        }
+      }
+    }
+  }
+}
+
+.error-state,
+.empty-state {
+  text-align: center;
+  padding: 40px 20px;
+
+  ion-icon {
+    font-size: 64px;
+    margin-bottom: 16px;
+  }
+
+  h3 {
+    font-size: 20px;
+    font-weight: 600;
+    margin: 16px 0 8px 0;
+  }
+
+  p {
+    color: var(--ion-color-medium);
+    font-size: 16px;
+    line-height: 1.5;
+    margin-bottom: 24px;
+  }
+}
+
+.results-info {
+  text-align: center;
+  border-top: 1px solid var(--ion-color-border);
+
+  .results-text {
+    font-size: 14px;
+    color: var(--ion-color-medium);
+    margin: 0;
+  }
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .search-section {
+    .filter-row {
+      flex-direction: column;
+      gap: 8px;
+    }
+  }
+
+  .news-card {
+    .article-actions {
+      flex-direction: column;
+      gap: 8px;
+      align-items: stretch;
+
+      ion-button {
+        justify-content: center;
+      }
+    }
+  }
+}
+
+// Dark mode adjustments
+@media (prefers-color-scheme: dark) {
+  .search-section {
+    background: var(--ion-color-step-50);
+  }
+}

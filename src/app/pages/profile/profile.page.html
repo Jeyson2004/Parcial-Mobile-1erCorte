@@ -1,0 +1,85 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/news"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Mi Perfil</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <div *ngIf="user" class="profile-container">
+     Profile Header
+    <div class="profile-header">
+      <div class="avatar-section">
+        <ion-avatar class="profile-avatar">
+          <ion-icon name="person-outline"></ion-icon>
+        </ion-avatar>
+        <h2>{{ user.firstName }} {{ user.lastName }}</h2>
+        <p class="user-email">{{ user.email }}</p>
+      </div>
+    </div>
+
+     Profile Information
+    <app-card title="Información Personal" [elevated]="true">
+      <div class="profile-info">
+        <div class="info-item">
+          <ion-icon name="person-outline" color="primary"></ion-icon>
+          <div class="info-content">
+            <label>Nombre Completo</label>
+            <span>{{ user.firstName }} {{ user.lastName }}</span>
+          </div>
+        </div>
+
+        <div class="info-item">
+          <ion-icon name="mail-outline" color="primary"></ion-icon>
+          <div class="info-content">
+            <label>Email</label>
+            <span>{{ user.email }}</span>
+          </div>
+        </div>
+
+        <div class="info-item">
+          <ion-icon name="location-outline" color="primary"></ion-icon>
+          <div class="info-content">
+            <label>País</label>
+            <span>{{ user.country }}</span>
+          </div>
+        </div>
+
+        <div class="info-item">
+          <ion-icon name="calendar-outline" color="primary"></ion-icon>
+          <div class="info-content">
+            <label>Fecha de Registro</label>
+            <span>{{ formatDate(user.createdAt?.toString()) }}</span>
+          </div>
+        </div>
+      </div>
+    </app-card>
+
+     Actions
+    <div class="profile-actions">
+      <app-button
+        text="Ver Noticias"
+        color="primary"
+        icon="newspaper-outline"
+        (buttonClick)="goToNews()"
+      ></app-button>
+
+      <app-button
+        text="Cerrar Sesión"
+        color="danger"
+        fill="outline"
+        icon="log-out-outline"
+        (buttonClick)="logout()"
+      ></app-button>
+    </div>
+  </div>
+
+   Loading State
+  <app-loader
+    *ngIf="!user"
+    message="Cargando perfil..."
+    size="large"
+  ></app-loader>
+</ion-content>
